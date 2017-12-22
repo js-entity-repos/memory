@@ -11,6 +11,7 @@ export default <Id, Entity>(config: Config<Entity>): RemoveEntity<Id> => {
     if (unmatchedEntities.length === storedEntities.length) {
       throw new MissingEntityError(config.entityName, id);
     }
+    /* istanbul ignore next */
     if ((unmatchedEntities.length + 1) !== storedEntities.length) {
       throw new ConflictingEntityError(config.entityName, id);
     }

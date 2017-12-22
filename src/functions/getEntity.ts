@@ -11,6 +11,7 @@ export default <Id, Entity>(config: Config<Entity>): GetEntity<Id, Entity> => {
     if (matchedEntities.length === 0) {
       throw new MissingEntityError(config.entityName, id);
     }
+    /* istanbul ignore next */
     if (matchedEntities.length > 1) {
       throw new ConflictingEntityError(config.entityName, id);
     }
