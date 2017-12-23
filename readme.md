@@ -4,9 +4,9 @@
 ### Usage
 1. Install it with `npm i @js-entity-repos/memory`.
 1. For each entity you will need to do the following.
-    1. Create Id and Entity interfaces.
-    1. Create a facade config.
-    1. Call the facade with the config and interfaces.
+    1. [Create Id and Entity interfaces](#id-and-entity-interface).
+    1. [Create a facade config](#facade-config).
+    1. [Call the facade with the config and interfaces](#calling-the-facade).
 
 ### Id and Entity Interface
 
