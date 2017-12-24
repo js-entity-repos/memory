@@ -7,7 +7,7 @@ import filterEntities from '../utils/filterEntities';
 export default <Id, Entity>(config: Config<Entity>): RemoveEntity<Id> => {
   return async ({ id }) => {
     const storedEntities = config.getEntities();
-    const unmatchedEntities = filterEntities(storedEntities, { $not: id });
+    const unmatchedEntities = filterEntities(storedEntities, { $nor: [id] });
     if (unmatchedEntities.length === storedEntities.length) {
       throw new MissingEntityError(config.entityName, id);
     }

@@ -4,7 +4,7 @@ import OverwriteEntity from '@js-entity-repos/core/dist/signatures/OverwriteEnti
 import Config from '../Config';
 import filterEntities from '../utils/filterEntities';
 
-export default <Id, Entity>(config: Config<Entity>): OverwriteEntity<Id, Entity> => {
+export default <Id, Entity extends Id>(config: Config<Entity>): OverwriteEntity<Id, Entity> => {
   return async ({ id, entity }) => {
     const storedEntities = config.getEntities();
     const matchedEntities = filterEntities(storedEntities, id);
@@ -19,7 +19,7 @@ export default <Id, Entity>(config: Config<Entity>): OverwriteEntity<Id, Entity>
     const overwrittenEntities = matchedEntities.map(() => {
       return { ...entity as any, ...id as any } as Entity;
     });
-    const unmatchedEntities = filterEntities(storedEntities, { $not: id });
+    const unmatchedEntities = filterEntities(storedEntities, { $nor: [id] });
     config.setEntities([...unmatchedEntities, ...overwrittenEntities]);
     return { entity: overwrittenEntities[0] };
   };

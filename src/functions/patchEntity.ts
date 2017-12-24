@@ -19,7 +19,7 @@ export default <Id, Entity>(config: Config<Entity>): PatchEntity<Id, Entity> => 
     const patchEntities = matchedEntities.map((matchedEntity) => {
       return { ...matchedEntity as any, ...patch as any } as Entity;
     });
-    const unmatchedEntities = filterEntities(storedEntities, { $not: id });
+    const unmatchedEntities = filterEntities(storedEntities, { $nor: [id] });
     config.setEntities([...unmatchedEntities, ...patchEntities]);
     return { entity: patchEntities[0] };
   };
