@@ -25,12 +25,14 @@ export interface TodoEntity extends TodoId {
 ### Facade Config
 
 ```ts
+import FacadeConfig from '@js-entity-repos/memory/dist/Config';
+
 interface State {
   todos: TodoEntity[];
 }
 
-const state = { todos: [] };
-const todoFacadeConfig = {
+const state: State = { todos: [] };
+const todoFacadeConfig: FacadeConfig = {
   getEntities: () => state.todos,
   setEntities: (todos) => state.todos = todos,
   entityName: 'todo',
