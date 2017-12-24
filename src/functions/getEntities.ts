@@ -1,10 +1,6 @@
 import GetEntities from '@js-entity-repos/core/dist/signatures/GetEntities';
-// tslint:disable-next-line:import-spacing
-import createCursorFromEntity
-  from '@js-entity-repos/core/dist/utils/createCursorFromEntity/createCursorFromEntity';
-// tslint:disable-next-line:import-spacing
-import createPaginationFilter
-  from '@js-entity-repos/core/dist/utils/createPaginationFilter/createPaginationFilter';
+import createCursorFromEntity from '@js-entity-repos/core/dist/utils/createCursorFromEntity';
+import createPaginationFilter from '@js-entity-repos/core/dist/utils/createPaginationFilter';
 import { first, last } from 'lodash';
 import Config from '../Config';
 import filterEntities from '../utils/filterEntities';

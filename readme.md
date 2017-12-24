@@ -40,7 +40,7 @@ const todoFacadeConfig = {
 ### Construct the Facade
 
 ```ts
-import { facade } from '@js-entity-repos/memory';
+import facade from '@js-entity-repos/memory/dist/facade';
 
 const todosFacade = facade<TodoId, TodoEntity>(todoFacadeConfig);
 ```

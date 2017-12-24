@@ -1,4 +1,4 @@
-import { facadeTest } from '@js-entity-repos/core/dist/tests/index';
+import facadeTest from '@js-entity-repos/core/dist/tests';
 import { TestEntity, TestId } from '@js-entity-repos/core/dist/tests/utils/testEntity';
 import facade from './facade';
 
