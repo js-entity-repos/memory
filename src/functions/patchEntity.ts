@@ -4,7 +4,7 @@ import PatchEntity from '@js-entity-repos/core/dist/signatures/PatchEntity';
 import Config from '../Config';
 import filterEntities from '../utils/filterEntities';
 
-export default <Id, Entity>(config: Config<Entity>): PatchEntity<Id, Entity> => {
+export default <Id, Entity extends Id>(config: Config<Entity>): PatchEntity<Id, Entity> => {
   return async ({ id, patch }) => {
     const storedEntities = config.getEntities();
     const matchedEntities = filterEntities(storedEntities, id);

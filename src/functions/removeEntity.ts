@@ -4,7 +4,7 @@ import RemoveEntity from '@js-entity-repos/core/dist/signatures/RemoveEntity';
 import Config from '../Config';
 import filterEntities from '../utils/filterEntities';
 
-export default <Id, Entity>(config: Config<Entity>): RemoveEntity<Id> => {
+export default <Id, Entity extends Id>(config: Config<Entity>): RemoveEntity<Id> => {
   return async ({ id }) => {
     const storedEntities = config.getEntities();
     const unmatchedEntities = filterEntities(storedEntities, { $nor: [id] });

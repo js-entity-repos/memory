@@ -4,7 +4,7 @@ import filterEntities from '../utils/filterEntities';
 import createEntity from './createEntity';
 import overwriteEntity from './overwriteEntity';
 
-export default <Id, Entity>(config: Config<Entity>): UpsertEntity<Id, Entity> => {
+export default <Id, Entity extends Id>(config: Config<Entity>): UpsertEntity<Id, Entity> => {
   return async ({ id, entity }) => {
     const storedEntities = config.getEntities();
     const matchedEntities = filterEntities(storedEntities, id);

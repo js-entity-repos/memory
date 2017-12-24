@@ -4,7 +4,7 @@ import GetEntity from '@js-entity-repos/core/dist/signatures/GetEntity';
 import Config from '../Config';
 import filterEntities from '../utils/filterEntities';
 
-export default <Id, Entity>(config: Config<Entity>): GetEntity<Id, Entity> => {
+export default <Id, Entity extends Id>(config: Config<Entity>): GetEntity<Id, Entity> => {
   return async ({ id }) => {
     const storedEntities = config.getEntities();
     const matchedEntities = filterEntities(storedEntities, id);
