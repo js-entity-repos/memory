@@ -12,11 +12,9 @@
 ### Id and Entity Interface
 
 ```ts
-export interface TodoId {
-  readonly id: string;
-}
+import Entity from '@js-entity-repos/core/dist/types/Entity';
 
-export interface TodoEntity extends TodoId {
+export interface TodoEntity extends Entity {
   readonly description: string;
   readonly completed: boolean;
 }
@@ -33,9 +31,10 @@ interface State {
 
 const state: State = { todos: [] };
 const todoFacadeConfig: FacadeConfig = {
+  defaultPaginationLimit: 100,
+  entityName: 'todo',
   getEntities: () => state.todos,
   setEntities: (todos) => state.todos = todos,
-  entityName: 'todo',
 };
 ```
 
@@ -44,5 +43,5 @@ const todoFacadeConfig: FacadeConfig = {
 ```ts
 import facade from '@js-entity-repos/memory/dist/facade';
 
-const todosFacade = facade<TodoId, TodoEntity>(todoFacadeConfig);
+const todosFacade = facade<TodoEntity>(todoFacadeConfig);
 ```
