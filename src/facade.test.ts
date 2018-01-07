@@ -9,7 +9,7 @@ interface State {
 
 const state: State = { entities: [] };
 
-facadeTest(facade<TestEntity>({
+facadeTest(facade({
   defaultPaginationLimit: 100,
   entityName: 'Test Entity',
   getEntities: () => state.entities,
