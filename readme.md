@@ -4,12 +4,12 @@
 ### Usage
 1. Install it with `npm i @js-entity-repos/memory`.
 1. For each entity you will need to do the following.
-    1. [Create Id and Entity interfaces](#id-and-entity-interface).
+    1. [Create Entity interfaces](#entity-interface).
     1. [Create a facade config](#facade-config).
     1. [Construct the facade with the config and interfaces](#calling-the-facade).
     1. [Use the facade](https://github.com/js-entity-repos/core/blob/master/docs/facade.md).
 
-### Id and Entity Interface
+### Entity Interface
 
 ```ts
 import Entity from '@js-entity-repos/core/dist/types/Entity';
