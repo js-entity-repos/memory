@@ -6,7 +6,7 @@
 1. For each entity you will need to do the following.
     1. [Create Entity interface](#entity-interface).
     1. [Create a facade config](#facade-config).
-    1. [Construct the facade](#calling-the-facade).
+    1. [Construct the facade](#construct-the-facade).
     1. [Use the facade](https://github.com/js-entity-repos/core/blob/master/docs/facade.md).
 
 ### Entity Interface
