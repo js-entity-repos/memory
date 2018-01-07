@@ -1,13 +1,13 @@
 import ConflictingEntityError from '@js-entity-repos/core/dist/errors/ConflictingEntityError';
 import MissingEntityError from '@js-entity-repos/core/dist/errors/MissingEntityError';
-import PatchEntity from '@js-entity-repos/core/dist/signatures/PatchEntity';
+import ReplaceEntity from '@js-entity-repos/core/dist/signatures/ReplaceEntity';
 import Entity from '@js-entity-repos/core/dist/types/Entity';
 import Filter from '@js-entity-repos/core/dist/types/Filter';
 import Config from '../Config';
 import filterEntities from '../utils/filterEntities';
 
-export default <E extends Entity>(config: Config<E>): PatchEntity<E> => {
-  return async ({ id, patch, filter = {} }) => {
+export default <E extends Entity>(config: Config<E>): ReplaceEntity<E> => {
+  return async ({ id, entity, filter = {} }) => {
     const storedEntities = config.getEntities();
     const idFilter = { id } as Filter<E>;
     const fullFilter = { $and: [idFilter, filter] };
@@ -20,11 +20,11 @@ export default <E extends Entity>(config: Config<E>): PatchEntity<E> => {
       throw new ConflictingEntityError(config.entityName, id);
     }
 
-    const patchEntities = matchedEntities.map((matchedEntity: E) => {
-      return { ...matchedEntity as any, ...patch as any } as E;
+    const replacedEntities = matchedEntities.map(() => {
+      return { ...entity as any, id } as E;
     });
-    const unmatchedEntities = filterEntities(storedEntities, { $nor: [idFilter] });
-    config.setEntities([...unmatchedEntities, ...patchEntities]);
-    return { entity: patchEntities[0] };
+    const unmatchedEntities = filterEntities(storedEntities, { $nor: [fullFilter] });
+    config.setEntities([...unmatchedEntities, ...replacedEntities]);
+    return { entity: replacedEntities[0] };
   };
 };

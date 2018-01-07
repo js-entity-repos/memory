@@ -1,5 +1,5 @@
 import facadeTest from '@js-entity-repos/core/dist/tests';
-import { TestEntity, TestId } from '@js-entity-repos/core/dist/tests/utils/testEntity';
+import { TestEntity } from '@js-entity-repos/core/dist/tests/utils/testEntity';
 import facade from './facade';
 
 interface State {
@@ -9,7 +9,8 @@ interface State {
 
 const state: State = { entities: [] };
 
-facadeTest(facade<TestId, TestEntity>({
+facadeTest(facade<TestEntity>({
+  defaultPaginationLimit: 100,
   entityName: 'Test Entity',
   getEntities: () => state.entities,
   setEntities: (entities) => state.entities = entities,

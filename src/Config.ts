@@ -1,5 +1,8 @@
-export default interface Config<Entity> {
-  readonly getEntities: () => Entity[];
-  readonly setEntities: (entities: Entity[]) => void;
+import Entity from '@js-entity-repos/core/dist/types/Entity';
+
+export default interface Config<E extends Entity> {
+  readonly getEntities: () => E[];
+  readonly setEntities: (entities: E[]) => void;
   readonly entityName: string;
+  readonly defaultPaginationLimit: number;
 }
