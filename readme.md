@@ -5,7 +5,7 @@
 1. Install it with `npm i @js-entity-repos/memory`.
 1. For each entity you will need to do the following.
     1. [Create Entity interface](#entity-interface).
-    1. [Create a facade config](#facade-config).
+    1. [Create a factory config](#factory-config).
     1. [Construct the facade](#construct-the-facade).
     1. [Use the facade](https://github.com/js-entity-repos/core/blob/master/docs/facade.md).
 
@@ -20,17 +20,17 @@ export interface TodoEntity extends Entity {
 }
 ```
 
-### Facade Config
+### Factory Config
 
 ```ts
-import FacadeConfig from '@js-entity-repos/memory/dist/Config';
+import FactoryConfig from '@js-entity-repos/memory/dist/Config';
 
 interface State {
   todos: TodoEntity[];
 }
 
 const state: State = { todos: [] };
-const todoFacadeConfig: FacadeConfig = {
+const todoFactoryConfig: FactoryConfig = {
   defaultPaginationLimit: 100,
   entityName: 'todo',
   getEntities: () => state.todos,
@@ -41,7 +41,7 @@ const todoFacadeConfig: FacadeConfig = {
 ### Construct the Facade
 
 ```ts
-import facade from '@js-entity-repos/memory/dist/facade';
+import factory from '@js-entity-repos/memory/dist/factory';
 
-const todosFacade = facade(todoFacadeConfig);
+const todosFacade = factory(todoFactoryConfig);
 ```
