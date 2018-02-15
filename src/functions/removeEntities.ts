@@ -5,8 +5,9 @@ import filterEntities from '../utils/filterEntities';
 
 export default <E extends Entity>(config: Config<E>): RemoveEntities<E> => {
   return async ({ filter = {} }) => {
-    const storedEntities = config.getEntities();
-    const unmatchedEntities = filterEntities(storedEntities, { $nor: [filter] });
+    const entities = config.getEntities();
+    const removalFilter = { $nor: [filter] };
+    const unmatchedEntities = filterEntities({ entities, filter: removalFilter });
     config.setEntities(unmatchedEntities);
   };
 };

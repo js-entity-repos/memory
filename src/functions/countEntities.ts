@@ -5,8 +5,8 @@ import filterEntities from '../utils/filterEntities';
 
 export default <E extends Entity>(config: Config<E>): CountEntities<E> => {
   return async ({ filter = {} }) => {
-    const storedEntities = config.getEntities();
-    const matchedEntities = filterEntities(storedEntities, filter);
+    const entities = config.getEntities();
+    const matchedEntities = filterEntities({ entities, filter });
     const count = matchedEntities.length;
     return { count };
   };

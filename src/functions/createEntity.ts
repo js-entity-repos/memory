@@ -5,16 +5,20 @@ import Filter from '@js-entity-repos/core/dist/types/Filter';
 import Config from '../Config';
 import filterEntities from '../utils/filterEntities';
 
-export default <E extends Entity>(config: Config<E>): CreateEntity<E> => {
+export default <E extends Entity>({
+  entityName,
+  getEntities,
+  setEntities,
+}: Config<E>): CreateEntity<E> => {
   return async ({ id, entity }) => {
-    const storedEntities = config.getEntities();
+    const entities = getEntities();
     const idFilter = { id } as Filter<E>;
-    const matchedEntities = filterEntities(storedEntities, idFilter);
+    const matchedEntities = filterEntities({ entities, filter: idFilter });
     if (matchedEntities.length > 0) {
-      throw new ConflictingEntityError(config.entityName, id);
+      throw new ConflictingEntityError(entityName, id);
     }
     const createdEntity = { ...entity as any, id };
-    config.setEntities([...config.getEntities(), createdEntity]);
+    setEntities([...entities, createdEntity]);
     return { entity: createdEntity };
   };
 };
