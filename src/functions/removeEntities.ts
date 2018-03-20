@@ -1,9 +1,9 @@
 import RemoveEntities from '@js-entity-repos/core/dist/signatures/RemoveEntities';
 import Entity from '@js-entity-repos/core/dist/types/Entity';
-import Config from '../Config';
+import FacadeConfig from '../FacadeConfig';
 import filterEntities from '../utils/filterEntities';
 
-export default <E extends Entity>(config: Config<E>): RemoveEntities<E> => {
+export default <E extends Entity>(config: FacadeConfig<E>): RemoveEntities<E> => {
   return async ({ filter = {} }) => {
     const entities = config.getEntities();
     const removalFilter = { $nor: [filter] };

@@ -1,14 +1,14 @@
 import PatchEntity from '@js-entity-repos/core/dist/signatures/PatchEntity';
 import Entity from '@js-entity-repos/core/dist/types/Entity';
 import { difference } from 'lodash';
-import Config from '../Config';
+import FacadeConfig from '../FacadeConfig';
 import filterEntity from '../utils/filterEntity';
 
 export default <E extends Entity>({
   entityName,
   getEntities,
   setEntities,
-}: Config<E>): PatchEntity<E> => {
+}: FacadeConfig<E>): PatchEntity<E> => {
   return async ({ id, patch, filter = {} }) => {
     const entities = getEntities();
     const matchedEntity = filterEntity({ entities, entityName, id, filter });

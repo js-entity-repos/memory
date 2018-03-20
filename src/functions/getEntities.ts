@@ -7,11 +7,11 @@ import { asc } from '@js-entity-repos/core/dist/types/SortOrder';
 import createCursorFromEntity from '@js-entity-repos/core/dist/utils/createCursorFromEntity';
 import createPaginationFilter from '@js-entity-repos/core/dist/utils/createPaginationFilter';
 import { first, last } from 'lodash';
-import Config from '../Config';
+import FacadeConfig from '../FacadeConfig';
 import filterEntities from '../utils/filterEntities';
 import sortEntities from '../utils/sortEntities';
 
-export default <E extends Entity>(config: Config<E>): GetEntities<E> => {
+export default <E extends Entity>(config: FacadeConfig<E>): GetEntities<E> => {
   const defaultPagination: Pagination = {
     cursor: undefined,
     direction: forward,

@@ -1,6 +1,7 @@
 import Facade from '@js-entity-repos/core/dist/Facade';
 import Entity from '@js-entity-repos/core/dist/types/Entity';
-import Config from './Config';
+import FacadeConfig from './FacadeConfig';
+import FactoryConfig from './FactoryConfig';
 import countEntities from './functions/countEntities';
 import createEntity from './functions/createEntity';
 import getEntities from './functions/getEntities';
@@ -10,15 +11,23 @@ import removeEntities from './functions/removeEntities';
 import removeEntity from './functions/removeEntity';
 import replaceEntity from './functions/replaceEntity';
 
-export default <E extends Entity>(config: Config<E>): Facade<E> => {
+export default <E extends Entity>(factoryConfig: FactoryConfig<E>): Facade<E> => {
+  // tslint:disable-next-line:no-let
+  let entities: E[] = [];
+  const facadeConfig: FacadeConfig<E> = {
+    defaultPaginationLimit: 10,
+    getEntities: () => entities,
+    setEntities: (nextEntities) => entities = nextEntities,
+    ...factoryConfig,
+  };
   return {
-    countEntities: countEntities<E>(config),
-    createEntity: createEntity<E>(config),
-    getEntities: getEntities<E>(config),
-    getEntity: getEntity<E>(config),
-    patchEntity: patchEntity<E>(config),
-    removeEntities: removeEntities<E>(config),
-    removeEntity: removeEntity<E>(config),
-    replaceEntity: replaceEntity<E>(config),
+    countEntities: countEntities<E>(facadeConfig),
+    createEntity: createEntity<E>(facadeConfig),
+    getEntities: getEntities<E>(facadeConfig),
+    getEntity: getEntity<E>(facadeConfig),
+    patchEntity: patchEntity<E>(facadeConfig),
+    removeEntities: removeEntities<E>(facadeConfig),
+    removeEntity: removeEntity<E>(facadeConfig),
+    replaceEntity: replaceEntity<E>(facadeConfig),
   };
 };

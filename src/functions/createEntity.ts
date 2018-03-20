@@ -2,14 +2,14 @@ import ConflictingEntityError from '@js-entity-repos/core/dist/errors/Conflictin
 import CreateEntity from '@js-entity-repos/core/dist/signatures/CreateEntity';
 import Entity from '@js-entity-repos/core/dist/types/Entity';
 import Filter from '@js-entity-repos/core/dist/types/Filter';
-import Config from '../Config';
+import FacadeConfig from '../FacadeConfig';
 import filterEntities from '../utils/filterEntities';
 
 export default <E extends Entity>({
   entityName,
   getEntities,
   setEntities,
-}: Config<E>): CreateEntity<E> => {
+}: FacadeConfig<E>): CreateEntity<E> => {
   return async ({ id, entity }) => {
     const entities = getEntities();
     const idFilter = { id } as Filter<E>;

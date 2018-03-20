@@ -3,10 +3,10 @@ import MissingEntityError from '@js-entity-repos/core/dist/errors/MissingEntityE
 import RemoveEntity from '@js-entity-repos/core/dist/signatures/RemoveEntity';
 import Entity from '@js-entity-repos/core/dist/types/Entity';
 import Filter from '@js-entity-repos/core/dist/types/Filter';
-import Config from '../Config';
+import FacadeConfig from '../FacadeConfig';
 import filterEntities from '../utils/filterEntities';
 
-export default <E extends Entity>(config: Config<E>): RemoveEntity<E> => {
+export default <E extends Entity>(config: FacadeConfig<E>): RemoveEntity<E> => {
   return async ({ id, filter = {} }) => {
     const entities = config.getEntities();
     const idFilter = { id } as Filter<E>;
