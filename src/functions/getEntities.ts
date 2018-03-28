@@ -1,11 +1,9 @@
 import GetEntities from '@js-entity-repos/core/dist/signatures/GetEntities';
-import { end } from '@js-entity-repos/core/dist/types/Cursor';
 import Entity from '@js-entity-repos/core/dist/types/Entity';
 import Pagination from '@js-entity-repos/core/dist/types/Pagination';
 import { forward } from '@js-entity-repos/core/dist/types/PaginationDirection';
 import Sort from '@js-entity-repos/core/dist/types/Sort';
 import { asc } from '@js-entity-repos/core/dist/types/SortOrder';
-import createEndCursorResult from '@js-entity-repos/core/dist/utils/createEndCursorResult';
 import createGetEntitiesResult from '@js-entity-repos/core/dist/utils/createGetEntitiesResult';
 import createPaginationFilter from '@js-entity-repos/core/dist/utils/createPaginationFilter';
 import FacadeConfig from '../FacadeConfig';
@@ -20,10 +18,6 @@ export default <E extends Entity>(config: FacadeConfig<E>): GetEntities<E> => {
   };
   const defaultSort = { id: asc } as Sort<E>;
   return async ({ filter = {}, sort = defaultSort, pagination = defaultPagination }) => {
-    if (pagination.cursor === end) {
-      return createEndCursorResult(pagination);
-    }
-
     const paginationFilter = createPaginationFilter(pagination, sort);
     const fullFilter = { $and: [filter, paginationFilter] };
     const storedEntities = config.getEntities();
