@@ -10,6 +10,7 @@ import patchEntity from './functions/patchEntity';
 import removeEntities from './functions/removeEntities';
 import removeEntity from './functions/removeEntity';
 import replaceEntity from './functions/replaceEntity';
+import createPromiser from './utils/createPromiser';
 
 export default <E extends Entity>(factoryConfig: FactoryConfig<E>): Facade<E> => {
   // tslint:disable-next-line:no-let
@@ -21,13 +22,13 @@ export default <E extends Entity>(factoryConfig: FactoryConfig<E>): Facade<E> =>
     ...factoryConfig,
   };
   return {
-    countEntities: countEntities<E>(facadeConfig),
-    createEntity: createEntity<E>(facadeConfig),
-    getEntities: getEntities<E>(facadeConfig),
-    getEntity: getEntity<E>(facadeConfig),
-    patchEntity: patchEntity<E>(facadeConfig),
-    removeEntities: removeEntities<E>(facadeConfig),
-    removeEntity: removeEntity<E>(facadeConfig),
-    replaceEntity: replaceEntity<E>(facadeConfig),
+    countEntities: createPromiser(countEntities<E>(facadeConfig)),
+    createEntity: createPromiser(createEntity<E>(facadeConfig)),
+    getEntities: createPromiser(getEntities<E>(facadeConfig)),
+    getEntity: createPromiser(getEntity<E>(facadeConfig)),
+    patchEntity: createPromiser(patchEntity<E>(facadeConfig)),
+    removeEntities: createPromiser(removeEntities<E>(facadeConfig)),
+    removeEntity: createPromiser(removeEntity<E>(facadeConfig)),
+    replaceEntity: createPromiser(replaceEntity<E>(facadeConfig)),
   };
 };
