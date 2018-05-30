@@ -40,7 +40,7 @@
     "nyc": "11.8.0",
     "power-assert": "1.5.0",
     "rimraf": "2.6.2",
-    "typescript": "2.8.3"
+    "typescript": "2.8.4"
   },
   "publishConfig": {
     "access": "public"
